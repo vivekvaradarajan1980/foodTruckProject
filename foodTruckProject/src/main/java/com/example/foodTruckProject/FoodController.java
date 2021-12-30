@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController
@@ -21,6 +20,11 @@ public class FoodController {
     @GetMapping("/api/menu/{price}")
     public List<FoodItems> getFoodItemByPrice(@PathVariable double price) {
         return foodService.getFoodItemByPrice(price);
+    }
+
+    @GetMapping("/api/menu/item/{name}")
+    public List<FoodItems> getFoodItemByName(@PathVariable String name) {
+        return foodService.getFoodItemByName(name);
     }
 
 }
