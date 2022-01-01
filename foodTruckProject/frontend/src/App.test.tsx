@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import App from './App';
 import {FoodItem} from "./FoodItem";
+
 
 describe('Food Truck Project',()=>{
 it('should render V & G Food Truck title', () => {
@@ -32,9 +33,16 @@ it('should render V & G Food Truck title', () => {
         })
     );
     render(<App />);
-    const list = await screen.getAllByRole('list')
-    expect(list).toHaveTextContent("Chicken");
+    const list = await screen.getAllByRole('listitem')
+    //const list = await screen.getAllByRole('list')
+    expect(list.map(foodItem => foodItem.textContent)).toEqual("Chicken, pork");
   });
 
+  it('should a description button of food item', async () => {
+    render(<App />);
+    //screen.getByRole('button', {name: /description/i})
+    await screen.getByText("Description ").click();
+    expect(screen.findByText("on a hoggy bread")).toBeInTheDocument();
+  });
 
 });
