@@ -1,11 +1,14 @@
 package com.example.foodTruckProject;
 
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.event.annotation.BeforeTestClass;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
@@ -29,15 +32,20 @@ public class FoodTruckControllerTest {
 
     @MockBean
     private FoodService foodService;
+    private List<FoodItems> itemList;
+    private  FoodItems item1;
+    private FoodItems item2;
+
+    @BeforeEach
+    public void setUp(){
+        itemList = new ArrayList<>();
+        item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65);
+        item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25);
+        itemList.addAll(Arrays.asList(item1,item2));
+    }
 
     @Test
     public void shouldReturnFoodMenuItems() throws Exception {
-        List<FoodItems> itemList = new ArrayList<>();
-        FoodItems item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65);
-        FoodItems item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25);
-        itemList.addAll(Arrays.asList(item1,item2));
-
-
         when(foodService.getMenuItems()).thenReturn(itemList);
 
         MockHttpServletRequestBuilder getRequest = get("/api/menu")
@@ -57,11 +65,6 @@ public class FoodTruckControllerTest {
 
     @Test
     public void shouldReturnTheFoodItemByPrice() throws Exception{
-        List<FoodItems> itemList = new ArrayList<>();
-        FoodItems item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65);
-        FoodItems item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25);
-        itemList.addAll(Arrays.asList(item1,item2));
-
         when(foodService.getFoodItemByPrice(5.65)).thenReturn(itemList);
 
         MockHttpServletRequestBuilder getRequest = get("/api/menu/5.65")
@@ -77,11 +80,6 @@ public class FoodTruckControllerTest {
 
     @Test
     public void shouldReturnTheFoodItemByName() throws Exception{
-        List<FoodItems> itemList = new ArrayList<>();
-        FoodItems item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65);
-        FoodItems item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25);
-        itemList.addAll(Arrays.asList(item1,item2));
-
         when(foodService.getFoodItemByName("pork")).thenReturn(itemList);
 
         MockHttpServletRequestBuilder getRequest = get("/api/menu/item/pork")
