@@ -1,9 +1,11 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
+import {render, screen, waitFor} from '@testing-library/react';
 import App from './App';
 import {FoodItem} from "./FoodItem";
 
+const axios = require('axios');
 
+jest.mock('axios');
 describe('Food Truck Project',()=>{
 it('should render V & G Food Truck title', () => {
   render(<App />);
@@ -12,30 +14,27 @@ it('should render V & G Food Truck title', () => {
 });
 
   it('should render list of food items', async () => {
-    const foodItem1: FoodItem = {
-      name: 'Chicken',
-      description: 'On a bread',
-      price: 4.58
-    };
-    const foodItem2: FoodItem = {
-      name: 'Pork',
-      description: 'On rice',
-      price: 5.59
-    };
 
-    const foodList: FoodItem[] =[foodItem1, foodItem2];
+    axios.get.mockResolvedValue({
+      data: [
+        {
+          name: 'Chicken',
+          description: 'On a bread',
+          price: 4.58
+        },
+        {
+          name: 'Pork',
+          description: 'On rice',
+          price: 5.59
+        }
+      ]
+    });
 
+    const{ getByTestId }= render(<App/>);
+    const  list= getByTestId("menu-items").children;
+    await waitFor(()=>expect(list[0]).toHaveTextContent("Chicken"));
+    await waitFor(()=>expect(list[1]).toHaveTextContent("Pork"));
 
-    // @ts-ignore
-    global.fetch = jest.fn(() =>
-        Promise.resolve({
-          json: () => Promise.resolve(foodList),
-        })
-    );
-    render(<App />);
-    const list = await screen.getAllByRole('listitem')
-    //const list = await screen.getAllByRole('list')
-    expect(list.map(foodItem => foodItem.textContent)).toEqual("Chicken, pork");
   });
 
   it('should a description button of food item', async () => {
