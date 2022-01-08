@@ -1,7 +1,7 @@
 import React from 'react';
 import {render, screen, waitFor} from '@testing-library/react';
 import App from './App';
-import {FoodItem} from "./FoodItem";
+import {FoodItem} from "./model/FoodItem";
 
 const axios = require('axios');
 
