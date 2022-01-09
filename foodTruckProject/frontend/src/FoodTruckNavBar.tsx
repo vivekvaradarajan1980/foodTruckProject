@@ -4,6 +4,7 @@ import Menu from "@material-ui/icons/Menu";
 import React from "react";
 import SearchIcon from '@mui/icons-material/Search';
 
+
 const Search = styled('div')(({theme}) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -17,7 +18,8 @@ const Search = styled('div')(({theme}) => ({
         marginLeft: theme.spacing(1),
         width: 'auto',
     },
-})), SearchIconWrapper = styled('div')(({theme}) => ({
+})),
+    SearchIconWrapper = styled('div')(({theme}) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
@@ -25,7 +27,8 @@ const Search = styled('div')(({theme}) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-})), StyledInputBase = styled(InputBase)(({theme}) => ({
+})),
+    StyledInputBase = styled(InputBase)(({theme}) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
@@ -47,7 +50,7 @@ const Search = styled('div')(({theme}) => ({
                 <IconButton aria-label="app">
                     <Menu/>
                 </IconButton>
-                <Typography variant="h6"> V & G Food Truck </Typography>
+                <Typography style={{color:"cornflowerblue"}} variant="h6"> V & G Food Truck </Typography>
                 <Search>
                     <SearchIconWrapper>
                         <SearchIcon/>

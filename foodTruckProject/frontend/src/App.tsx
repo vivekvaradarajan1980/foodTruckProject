@@ -3,6 +3,11 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {FoodItem} from "./model/FoodItem";
 import FoodTruckNavBar from "./FoodTruckNavBar";
+import foodTruck from "./foodTruck.gif";
+import png from "./PngItem_1227140.png";
+
+
+
 
 function App() {
     const [foodList, setFoodList] = useState<FoodItem[] >([]);
@@ -30,8 +35,10 @@ function App() {
     // @ts-ignore
     return <div className="App">
         <FoodTruckNavBar handleSearchBox={handleSearchBox}/>
+        <div>
+            <img src={png} />
+        </div>
         <h1 >V & G Food Truck</h1>
-
         <ul className='foodList' data-testid="menu-items" >
             {foodList.filter(each => each.name.toLowerCase().includes(search.toLowerCase()) ||
                 each.description.toLowerCase().includes(search.toLowerCase())).map((each, index) => <>
