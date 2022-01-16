@@ -3,11 +3,14 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {FoodItem} from "./model/FoodItem";
 import FoodTruckNavBar from "./FoodTruckNavBar";
+import FoodMenuForm from "./FoodMenuForm";
 
 function App() {
     const [foodList, setFoodList] = useState<FoodItem[] >([]);
     const [showDescription, setShowDescription] = useState<boolean>(false);
     const [search, setSearch] = useState("");
+
+    const [renderForm, setRenderForm] = useState(false);
 
     useEffect(() => {
         
@@ -27,24 +30,33 @@ function App() {
     const handleSearchBox = (event: React.ChangeEvent<HTMLInputElement>) =>{
         setSearch(event.target.value)
     }
+
+    const handleForm=()=>{
+        setRenderForm(!renderForm)
+
+    }
+
     // @ts-ignore
     return <div className="App">
-        <FoodTruckNavBar handleSearchBox={handleSearchBox}/>
-        <h1 >V & G Food Truck</h1>
+
+        <FoodTruckNavBar handleForm={handleForm} handleSearchBox={handleSearchBox}/>
+        {renderForm ? <FoodMenuForm handleForm={handleForm}/> : <>
+
+       <h1 >V & G Food Truck</h1>
 
         <ul className='foodList' data-testid="menu-items" >
             {foodList.filter(each => each.name.toLowerCase().includes(search.toLowerCase()) ||
-                each.description.toLowerCase().includes(search.toLowerCase())).map((each, index) => <>
+                each.description.toLowerCase().includes(search.toLowerCase())).map((each, index) =>
                     <li key={index}>
-                        <div  key={index}>{each.name} {each.price}<br/></div>
-                        {showDescription && <div  key={index}><b>{each.description}</b></div>}
+                        {each.name} {each.price}<br/>
+                        {showDescription && <b key={index}>{each.description}</b>}
                     </li>
-                    <br/>
 
-                </>)}
+
+                )}
         </ul>
-        <button onClick={getDescriptionOfFoodItem} key="index">Food Description</button>
-    </div>;
+        <button onClick={getDescriptionOfFoodItem}>Food Description</button></>}
+    </div>
 }
 
 export default App;
