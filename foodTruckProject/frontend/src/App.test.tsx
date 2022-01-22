@@ -34,11 +34,9 @@ it('should render V & G Food Truck title', () => {
       ]
     });
 
-    const{ getByTestId }= render(<App/>);
-    const  list= getByTestId("menu-items").children;
-    await waitFor(()=>expect(list[0]).toHaveTextContent("Chicken"));
-    await waitFor(()=>expect(list[1]).toHaveTextContent("Pork"));
-
+    render(<App/>);
+   const fooditems = await screen.findAllByRole("listitem");
+    expect(fooditems.map(item=>item.textContent)).toEqual(["Chicken 4.58","Pork 5.59"]);
 
   });
 

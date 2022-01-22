@@ -10,9 +10,8 @@ const axios = require('axios');
 describe('it tests the food menu form', ()=>{
     it('tests if form has 3 text boxes, one for each field, and a button',()=>{
 
-        render(<FoodMenuForm/>)
-        expect(screen.getByRole('textbox',{name:/food_price/})).toBeInTheDocument();
-
+        render(<FoodMenuForm handleForm={jest.fn}/>)
+        expect(screen.getByRole('button',{name:/Submit/})).toBeInTheDocument();
 
         });
 
@@ -23,12 +22,16 @@ describe('it tests the food menu form', ()=>{
         const handleForm=jest.fn();
         render(<FoodMenuForm handleForm={handleForm}/>);
 
+        const post = jest.mock(axios)
 
+        userEvent.type(screen.getByRole('textbox',{name:/name/i}),'Chicken rice')
 
-        userEvent.type(screen.getByRole('textbox',{name:/food_name/i}),'Chicken rice')
-        userEvent.type(screen.getByRole('textbox',{name:/food_price/i}),'4.50')
-        userEvent.type(screen.getByRole('textbox',{name:/food_description/i}),'on rice')
-        userEvent.click(screen.getByRole("button",{name:/create item/i}));
-        expect(handleForm).toHaveBeenCalledTimes(1)
-    })
+        userEvent.type(screen.getByRole('textbox',{name:/price/i}),'4.50')
+
+        userEvent.type(screen.getByRole('textbox',{name:/description/i}),'on rice')
+
+        userEvent.click(screen.getByRole("button",{name:/Submit/i}));
+
+        expect(post).toHaveBeenCalled();
+})
 })

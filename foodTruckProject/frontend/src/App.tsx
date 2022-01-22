@@ -49,7 +49,7 @@ function App() {
                 each.description.toLowerCase().includes(search.toLowerCase())).map((each, index) =>
                     <li key={index}>
                         {each.name} {each.price}<br/>
-                        {showDescription && <b key={index}>{each.description}</b>}
+                        {showDescription && <b >{each.description}</b>}
                     </li>
 
 

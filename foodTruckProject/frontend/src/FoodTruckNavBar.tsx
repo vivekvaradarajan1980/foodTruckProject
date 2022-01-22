@@ -73,6 +73,7 @@ const FoodTruckNavBar = (props: { handleForm: () => void; handleSearchBox: React
     const [renderForm, setRenderForm] =useState<boolean>(false);
 
     function renderFoodMenuForm() {
+        setIsDrawerOpen(false)
         props.handleForm();
 
     }
@@ -90,7 +91,7 @@ const FoodTruckNavBar = (props: { handleForm: () => void; handleSearchBox: React
                 </IconButton>
 
 
-                <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+                <Drawer anchor="right" open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
                     <List className={classes.drawer}>
                         <ListItem button>
                             <ListItemText onClick={renderFoodMenuForm} primary="Add item" />

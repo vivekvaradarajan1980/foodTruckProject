@@ -1,37 +1,43 @@
-import {useState} from "react";
+import {FormEvent, useState} from "react";
 import {FoodItem} from "./model/FoodItem";
 import axios from "axios";
-
 
 
 require('axios');
 
 
+const FoodMenuForm = (props: { handleForm: () => void; }) => {
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState('');
+    const [description, setDescription] = useState('');
 
- const FoodMenuForm =(props: { handleForm: () => void; })=>{
-    const [name, setName]=useState('');
-    const [price,setPrice]=useState('');
-    const [description,setDescription]=useState('');
-
-     const postFoodMenu = (name: string, price: string, description: string) =>{
-    // axios.post....
+    const postFoodMenu = (event: FormEvent<HTMLFormElement>, name: string, price: string, description: string) =>{
+         event.preventDefault()
+       axios.post('http://localhost:8080/api/menu',{name:name, price:price, description: description});
        props.handleForm();
      };
 
 
 
 
-    return(<>
+    return(
+        <form onSubmit={(e)=>postFoodMenu(e,name,price,description)}>
+        <label>
+            Food Name:
+            <input type="text" name="name" />
+        </label>
 
-        <input value={name}  onChange={(e)=>setName(e.target.value)} aria-label="food_name"/>
+            <label>
+                Food Description:
+                <input type="text" name="description" />
+            </label>
 
-        <input value={description} onChange={(e)=>setDescription(e.target.value )} aria-label="food_description"/>
-
-        <input value={price} onChange={(e)=>setPrice(e.target.value)} aria-label="food_price"/>
-
-         <button onClick={(event)=>postFoodMenu(name,price,description)}>Create item</button>
-
-        </>)
+            <label>
+                Food Price:
+                <input type="text" name="price" />
+            </label>
+        <input type="submit" value="Submit" />
+    </form>)
 
 }
 
