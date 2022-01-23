@@ -43,27 +43,22 @@ function App() {
 
     // @ts-ignore
     return <div className="App">
-        <FoodTruckNavBar handleSearchBox={handleSearchBox}/>
+        <FoodTruckNavBar handleForm={handleForm} handleSearchBox={handleSearchBox}/>
         <div>
             <img src={png} />
         </div>
-        <h1 >V & G Food Truck</h1>
 
-        <FoodTruckNavBar handleForm={handleForm} handleSearchBox={handleSearchBox}/>
         {renderForm ? <FoodMenuForm handleForm={handleForm}/> : <>
 
-       <h1 >V & G Food Truck</h1>
 
         <ul className='foodList' data-testid="menu-items" >
             {foodList.filter(each => each.name.toLowerCase().includes(search.toLowerCase()) ||
                 each.description.toLowerCase().includes(search.toLowerCase())).map((each, index) =>
                     <li key={index}>
-                        {each.name} {each.price}<br/>
+                        {each.name} {each.price}
+                        <br/>
                         {showDescription && <b >{each.description}</b>}
                     </li>
-                    <br/>
-
-
                 )}
         </ul>
         <button onClick={getDescriptionOfFoodItem}>Food Description</button></>}

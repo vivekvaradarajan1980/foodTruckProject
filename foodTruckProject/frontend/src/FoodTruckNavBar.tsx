@@ -111,7 +111,6 @@ const FoodTruckNavBar = (props: { handleForm: () => void; handleSearchBox: React
                         </ListItem>
                     </List>
                 </Drawer>
-                <Typography variant="h6"> V & G Food Truck </Typography>
                 <Search>
                     <SearchIconWrapper>
                         <SearchIcon/>
