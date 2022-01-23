@@ -1,10 +1,8 @@
 package com.example.foodTruckProject;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -17,6 +15,10 @@ public class FoodController {
     @GetMapping("/api/menu")
     public List<FoodItems> getMenuItems(){
         return foodService.getMenuItems();
+    }
+
+    @PostMapping("/api/menu")
+    public FoodItems postMenuItems(@RequestBody FoodItems item){return foodService.postMenuItem(item);
     }
 
     @GetMapping("/api/menu/{price}")

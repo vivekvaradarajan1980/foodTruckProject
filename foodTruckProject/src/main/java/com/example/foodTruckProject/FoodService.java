@@ -22,4 +22,7 @@ public class FoodService {
         return foodRepository.findAllByNameContainingIgnoreCase(name);
 
     }
+
+    public FoodItems postMenuItem(FoodItems item) {
+        return foodRepository.save(item);    }
 }

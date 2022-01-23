@@ -11,9 +11,12 @@ const FoodMenuForm = (props: { handleForm: () => void; }) => {
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
 
-    const postFoodMenu = (event: FormEvent<HTMLFormElement>, name: string, price: string, description: string) =>{
+    const postFoodMenu = (event: { preventDefault: () => void; }) =>{
          event.preventDefault()
-       axios.post('http://localhost:8080/api/menu',{name:name, price:price, description: description});
+
+       axios.post('http://localhost:8080/api/menu',{name:name, price:price, description: description},
+           {headers:{"Content-Type" : "application/json"}})
+
        props.handleForm();
      };
 
@@ -21,20 +24,20 @@ const FoodMenuForm = (props: { handleForm: () => void; }) => {
 
 
     return(
-        <form onSubmit={(e)=>postFoodMenu(e,name,price,description)}>
+        <form onSubmit={postFoodMenu}>
         <label>
             Food Name:
-            <input type="text" name="name" />
+            <input type="text" name="name" value={name} onChange={e=>setName(e.target.value)} />
         </label>
 
             <label>
                 Food Description:
-                <input type="text" name="description" />
+                <input type="text" name="description" value={description} onChange={e=>setDescription(e.target.value)}/>
             </label>
 
             <label>
                 Food Price:
-                <input type="text" name="price" />
+                <input type="text" name="price"  value={price} onChange={e=>setPrice(e.target.value)}/>
             </label>
         <input type="submit" value="Submit" />
     </form>)

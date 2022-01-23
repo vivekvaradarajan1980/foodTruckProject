@@ -1,5 +1,6 @@
 package com.example.foodTruckProject;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -92,4 +94,25 @@ public class FoodTruckControllerTest {
                 .andExpect(jsonPath("$[1].price", is(item2.getPrice())))
                 .andExpect(jsonPath("$[1].description", is(item2.getDescription())));
     }
+
+    @Test
+    public void shoulPostFoodMenuItem() throws Exception {
+        when(foodService.postMenuItem(item1)).thenReturn(item1);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        MockHttpServletRequestBuilder postRequest = post("/api/menu")
+                .content(objectMapper.writeValueAsString(item1))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(postRequest)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value(item1.getName()))
+                .andExpect(jsonPath("$.description").value(item1.getDescription()))
+                .andExpect(jsonPath("$.price").value(item1.getPrice()));
+
+
+    }
+
 }

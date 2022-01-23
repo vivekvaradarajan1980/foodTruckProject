@@ -22,7 +22,7 @@ describe('it tests the food menu form', ()=>{
         const handleForm=jest.fn();
         render(<FoodMenuForm handleForm={handleForm}/>);
 
-        const post = jest.mock(axios)
+         axios.post = jest.fn().mockImplementation();
 
         userEvent.type(screen.getByRole('textbox',{name:/name/i}),'Chicken rice')
 
@@ -32,6 +32,6 @@ describe('it tests the food menu form', ()=>{
 
         userEvent.click(screen.getByRole("button",{name:/Submit/i}));
 
-        expect(post).toHaveBeenCalled();
+        expect(axios.post).toHaveBeenCalled();
 })
 })
