@@ -1,8 +1,21 @@
-import {alpha, InputBase, styled} from "@mui/material";
+import {
+    alpha,
+    Button,
+    Drawer,
+    InputBase,
+    List,
+    ListItem,
+    ListItemText,
+    MenuItem,
+    styled
+} from "@mui/material";
 import {AppBar, IconButton, Toolbar, Typography} from "@material-ui/core";
 import Menu from "@material-ui/icons/Menu";
-import React from "react";
+import React, {useState} from "react";
 import SearchIcon from '@mui/icons-material/Search';
+import MenuIcon from "@material-ui/icons/Menu";
+import { makeStyles, createStyles } from '@mui/styles';
+
 
 
 const Search = styled('div')(({theme}) => ({
@@ -18,8 +31,8 @@ const Search = styled('div')(({theme}) => ({
         marginLeft: theme.spacing(1),
         width: 'auto',
     },
-})),
-    SearchIconWrapper = styled('div')(({theme}) => ({
+}));
+const SearchIconWrapper = styled('div')(({theme}) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
@@ -27,8 +40,8 @@ const Search = styled('div')(({theme}) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-})),
-    StyledInputBase = styled(InputBase)(({theme}) => ({
+}));
+const StyledInputBase = styled(InputBase)(({theme}) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
@@ -43,14 +56,62 @@ const Search = styled('div')(({theme}) => ({
             },
         },
     },
-})), FoodTruckNavBar = (props: { handleSearchBox: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined; }) => {
+}));
+
+
+const FoodTruckNavBar = (props: { handleForm: () => void; handleSearchBox: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined; }) => {
+    const useStyles = makeStyles({
+        drawer: {
+            width: 250
+        }
+    });
+
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+    const classes=useStyles();
+
+    const [renderForm, setRenderForm] =useState<boolean>(false);
+
+    function renderFoodMenuForm() {
+        setIsDrawerOpen(false)
+        props.handleForm();
+
+    }
+
     return (
         <AppBar position="sticky" style={{backgroundColor: "darkolivegreen", color: "black"}}>
             <Toolbar>
-                <IconButton aria-label="app">
-                    <Menu/>
+                <IconButton
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    onClick={() => setIsDrawerOpen(true)}
+                >
+                    <MenuIcon />
                 </IconButton>
                 <Typography style={{color:"cornflowerblue"}} variant="h6"> V & G Food Truck </Typography>
+
+
+                <Drawer anchor="right" open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+                    <List className={classes.drawer}>
+                        <ListItem button>
+                            <ListItemText onClick={renderFoodMenuForm} primary="Add item" />
+                        </ListItem>
+
+                        <ListItem button>
+                            <ListItemText primary="About" />
+                        </ListItem>
+
+                        <ListItem button>
+                            <ListItemText primary="Contact" />
+                        </ListItem>
+
+                        <ListItem button>
+                            <ListItemText primary="Services" />
+                        </ListItem>
+                    </List>
+                </Drawer>
+                <Typography variant="h6"> V & G Food Truck </Typography>
                 <Search>
                     <SearchIconWrapper>
                         <SearchIcon/>
@@ -62,8 +123,11 @@ const Search = styled('div')(({theme}) => ({
                     />
                 </Search>
             </Toolbar>
+
+
         </AppBar>
     )
 }
 
 export default FoodTruckNavBar;
+
