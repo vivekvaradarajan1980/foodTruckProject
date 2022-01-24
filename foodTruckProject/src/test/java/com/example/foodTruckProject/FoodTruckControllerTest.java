@@ -1,7 +1,6 @@
 package com.example.foodTruckProject;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
@@ -37,6 +35,7 @@ public class FoodTruckControllerTest {
     private List<FoodItems> itemList;
     private  FoodItems item1;
     private FoodItems item2;
+
 
     @BeforeEach
     public void setUp(){
@@ -97,20 +96,21 @@ public class FoodTruckControllerTest {
 
     @Test
     public void shoulPostFoodMenuItem() throws Exception {
-        when(foodService.postMenuItem(item1)).thenReturn(item1);
+        when(foodService.postMenuItem(item2)).thenReturn(item2);
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        MockHttpServletRequestBuilder postRequest = post("/api/menu")
-                .content(objectMapper.writeValueAsString(item1))
+        MockHttpServletRequestBuilder postRequest = post("/api/menu/item")
+                .content(objectMapper.writeValueAsString(item2))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON);
 
         mockMvc.perform(postRequest)
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value(item1.getName()))
-                .andExpect(jsonPath("$.description").value(item1.getDescription()))
-                .andExpect(jsonPath("$.price").value(item1.getPrice()));
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$[0].name", is(item2.getName())))
+                .andExpect(jsonPath("$[0].price", is(item2.getPrice())))
+                .andExpect(jsonPath("$[0].description", is(item2.getDescription())));
+
 
 
     }

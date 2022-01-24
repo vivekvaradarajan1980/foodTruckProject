@@ -1,4 +1,4 @@
-import {FormEvent, useState} from "react";
+import React, {FormEvent, useState} from "react";
 import {FoodItem} from "./model/FoodItem";
 import axios from "axios";
 
@@ -11,20 +11,23 @@ const FoodMenuForm = (props: { handleForm: () => void; }) => {
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
 
-    const postFoodMenu = (event: { preventDefault: () => void; }) =>{
-         event.preventDefault()
+    const postFoodMenu = (event: React.FormEvent<HTMLFormElement>, name: string, description: string, price: string)=>{
+         event.preventDefault();
 
-       axios.post('http://localhost:8080/api/menu',{name:name, price:price, description: description},
-           {headers:{"Content-Type" : "application/json"}})
+        const dataToSave={name:name, price:price, description: description}
+
+       axios.post('http://localhost:8080/api/menu/item',dataToSave,
+           {headers:{"Content-Type" : "application/json"}}).catch(e=>alert(e))
 
        props.handleForm();
+
      };
 
 
 
 
     return(
-        <form onSubmit={postFoodMenu}>
+        <form onSubmit={(e)=>postFoodMenu(e,name,description,price)}>
         <label>
             Food Name:
             <input type="text" name="name" value={name} onChange={e=>setName(e.target.value)} />

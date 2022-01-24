@@ -23,20 +23,19 @@ it('should render V & G Food Truck title', () => {
       data: [
         {
           name: 'Chicken',
-          description: 'On a bread',
           price: 4.58
         },
         {
           name: 'Pork',
-          description: 'On rice',
           price: 5.59
         }
       ]
     });
 
     render(<App/>);
-   const fooditems = await screen.findAllByRole("listitem");
+    const fooditems = await screen.findAllByRole("listitem");
     expect(fooditems.map(item=>item.textContent)).toEqual(["Chicken 4.58","Pork 5.59"]);
+
 
   });
 

@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class FoodServiceTest {
@@ -48,6 +48,7 @@ public class FoodServiceTest {
 
         List<FoodItems> returnedItems = foodService.getFoodItemByPrice(5.65);
 
+        verifyNoMoreInteractions(foodRepository);
         assertThat(returnedItems).isEqualTo(Arrays.asList(item1));
 
     }

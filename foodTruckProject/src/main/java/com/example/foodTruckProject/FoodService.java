@@ -24,5 +24,6 @@ public class FoodService {
     }
 
     public FoodItems postMenuItem(FoodItems item) {
-        return foodRepository.save(item);    }
+        return foodRepository.save(item);
+    }
 }

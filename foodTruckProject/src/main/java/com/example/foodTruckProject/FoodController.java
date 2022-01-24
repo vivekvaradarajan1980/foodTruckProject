@@ -1,12 +1,13 @@
 package com.example.foodTruckProject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class FoodController {
 
     @Autowired
@@ -17,7 +18,8 @@ public class FoodController {
         return foodService.getMenuItems();
     }
 
-    @PostMapping("/api/menu")
+    @PostMapping("/api/menu/item")
+    @ResponseStatus(HttpStatus.CREATED)
     public FoodItems postMenuItems(@RequestBody FoodItems item){return foodService.postMenuItem(item);
     }
 
