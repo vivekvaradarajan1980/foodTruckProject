@@ -1,10 +1,5 @@
 package com.example.foodTruckProject;
 
-import jdk.jfr.DataAmount;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 
@@ -19,14 +14,16 @@ public class FoodItems {
     private String name;
     private String description;
     private double price;
+    private String type;
 
     public FoodItems() {
     }
 
-    public FoodItems(String name, String description, double price) {
+    public FoodItems(String name, String description, double price, String type) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.type = type;
     }
 
     public String getName() {
@@ -51,5 +48,13 @@ public class FoodItems {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

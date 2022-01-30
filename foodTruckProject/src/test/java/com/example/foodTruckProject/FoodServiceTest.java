@@ -24,8 +24,8 @@ public class FoodServiceTest {
     @Test
     public void shouldReturnFoodMenuItems() {
         List<FoodItems> itemList = new ArrayList<>();
-        FoodItems item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65);
-        FoodItems item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25);
+        FoodItems item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65, "");
+        FoodItems item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25, "");
         itemList.addAll(Arrays.asList(item1, item2));
 
         when(foodRepository.findAll()).thenReturn(itemList);
@@ -38,8 +38,8 @@ public class FoodServiceTest {
     @Test
     public void shouldReturnFoodItemByPrice() {
         List<FoodItems> itemList = new ArrayList<>();
-        FoodItems item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65);
-        FoodItems item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25);
+        FoodItems item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65, "");
+        FoodItems item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25, "");
         itemList.addAll(Arrays.asList(item1, item2));
 
         System.out.println(Arrays.asList(item1));
@@ -56,8 +56,8 @@ public class FoodServiceTest {
     @Test
     public void shouldReturnFoodItemByName() {
         List<FoodItems> itemList = new ArrayList<>();
-        FoodItems item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65);
-        FoodItems item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25);
+        FoodItems item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65, "");
+        FoodItems item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25, "");
         itemList.addAll(Arrays.asList(item1, item2));
 
         System.out.println(Arrays.asList(item1));

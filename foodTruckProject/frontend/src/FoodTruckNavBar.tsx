@@ -59,7 +59,7 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
 }));
 
 
-const FoodTruckNavBar = (props: { handleForm: () => void; handleSearchBox: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined; }) => {
+const FoodTruckNavBar = (props: { handleForm: () => void; renderDrinks: () => void; handleSearchBox: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined; }) => {
     const useStyles = makeStyles({
         drawer: {
             width: 250
@@ -68,13 +68,20 @@ const FoodTruckNavBar = (props: { handleForm: () => void; handleSearchBox: React
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-    const classes=useStyles();
+    const classes=useStyles()
 
-    const [renderForm, setRenderForm] =useState<boolean>(false);
+    const [drinksOrFood, setDrinksOrFood] = useState('Food')
 
     function renderFoodMenuForm() {
         setIsDrawerOpen(false)
         props.handleForm();
+
+    }
+
+    function renderDrinks() {
+        setIsDrawerOpen(false)
+        setDrinksOrFood(drinksOrFood=="Food"? "Drinks":"Food")
+        props.renderDrinks();
 
     }
 
@@ -99,7 +106,7 @@ const FoodTruckNavBar = (props: { handleForm: () => void; handleSearchBox: React
                         </ListItem>
 
                         <ListItem button>
-                            <ListItemText primary="About" />
+                            <ListItemText primary={drinksOrFood} onClick={renderDrinks}  />
                         </ListItem>
 
                         <ListItem button>

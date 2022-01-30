@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -17,8 +18,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -37,12 +37,15 @@ public class FoodTruckControllerTest {
     private FoodItems item2;
 
 
+    private FoodRepository foodRepository;
+
     @BeforeEach
     public void setUp(){
         itemList = new ArrayList<>();
-        item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65);
-        item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25);
+        item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65, "food");
+        item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25, "food");
         itemList.addAll(Arrays.asList(item1,item2));
+
     }
 
     @Test
@@ -110,6 +113,22 @@ public class FoodTruckControllerTest {
                 .andExpect(jsonPath("$[0].name", is(item2.getName())))
                 .andExpect(jsonPath("$[0].price", is(item2.getPrice())))
                 .andExpect(jsonPath("$[0].description", is(item2.getDescription())));
+
+
+
+    }
+
+    @Test
+    public void shouldDeleteFoodMenuItem() throws Exception {
+
+
+        MockHttpServletRequestBuilder postRequest = delete("/api/menu/item/delete/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(postRequest)
+                .andExpect(status().isNoContent());
+
 
 
 

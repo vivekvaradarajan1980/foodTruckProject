@@ -33,4 +33,11 @@ public class FoodController {
         return foodService.getFoodItemByName(name);
     }
 
+    @DeleteMapping("/api/menu/item/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteFoodItemById(@PathVariable Long id) {
+         foodService.deleteMenuItem(id);
+
+    }
+
 }

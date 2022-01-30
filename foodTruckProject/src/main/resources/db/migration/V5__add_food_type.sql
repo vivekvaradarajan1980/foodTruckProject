@@ -1,0 +1,1 @@
+ALTER TABLE food_menu ADD COLUMN "type" varchar DEFAULT 'food';

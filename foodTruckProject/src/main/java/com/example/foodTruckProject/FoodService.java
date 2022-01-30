@@ -1,6 +1,7 @@
 package com.example.foodTruckProject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -25,5 +26,12 @@ public class FoodService {
 
     public FoodItems postMenuItem(FoodItems item) {
         return foodRepository.save(item);
+    }
+
+    public void deleteMenuItem(long id) {
+            foodRepository.deleteById(id);
+
+
+
     }
 }
