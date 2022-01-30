@@ -70,7 +70,7 @@ const FoodTruckNavBar = (props: { handleForm: () => void; renderDrinks: () => vo
 
     const classes=useStyles()
 
-    const [drinksOrFood, setDrinksOrFood] = useState('Food')
+    const [drinksOrFood, setDrinksOrFood] = useState('Drinks')
 
     function renderFoodMenuForm() {
         setIsDrawerOpen(false)

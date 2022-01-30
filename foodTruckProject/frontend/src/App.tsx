@@ -62,12 +62,12 @@ function App() {
                 each.description.toLowerCase().includes(search.toLowerCase())).map((each, index) =>
                     <li key={index}>
                         { (!showDrinks && each.type=="food")? each.name +' '+ each.price:null}
-                        {(showDrinks && each.type=="drinks")? each.name +' '+ each.price:null
-                        }
-
+                        {(showDrinks && each.type=="drinks")? each.name +' '+ each.price:null}
                         <br/>
-                        {showDescription && <b >{each.description}</b>}
+                        {(!showDrinks && each.type=="food" && showDescription) && <b >{each.description}</b>}
+                        {(showDrinks && each.type=="drinks" && showDescription) && <b >{each.description}</b>}
                     </li>
+
                 )}
         </ul>
         <button onClick={getDescriptionOfFoodItem}>Food Description</button></>}
