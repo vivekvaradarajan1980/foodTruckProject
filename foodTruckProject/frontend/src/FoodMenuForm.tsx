@@ -30,17 +30,17 @@ const FoodMenuForm = (props: { handleForm: () => void; }) => {
         <form onSubmit={(e)=>postFoodMenu(e,name,description,price)}>
         <label>
             Food Name:
-            <input type="text" name="name" value={name} onChange={e=>setName(e.target.value)} />
+            <input type="text" name="name" value={name} onChange={e=>setName(e.target.value)} placeholder="Name of Food" required/>
         </label>
 
             <label>
                 Food Description:
-                <input type="text" name="description" value={description} onChange={e=>setDescription(e.target.value)}/>
+                <input type="text" name="description" value={description} onChange={e=>setDescription(e.target.value)} required placeholder="Description of Food"/>
             </label>
 
             <label>
                 Food Price:
-                <input type="text" name="price"  value={price} onChange={e=>setPrice(e.target.value)}/>
+                <input type="number" name="price"  value={price} onChange={e=>setPrice(e.target.value)} required placeholder="Price of Food"/>
             </label>
         <input type="submit" value="Submit" />
     </form>)
