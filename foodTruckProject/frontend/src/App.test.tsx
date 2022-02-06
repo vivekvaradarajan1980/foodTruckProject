@@ -23,11 +23,14 @@ it('should render V & G Food Truck title', () => {
       data: [
         {
           name: 'Chicken',
-          price: 4.58
+          price: 4.58,
+          type:"food"
         },
         {
           name: 'Pork',
-          price: 5.59
+          price: 5.59,
+          type:"food"
+
         }
       ]
     });
@@ -48,12 +51,14 @@ it('should render V & G Food Truck title', () => {
         {
           name: 'Chicken',
           description: 'On a bread',
-          price: 4.58
+          price: 4.58,
+          type:"food"
         },
         {
           name: 'Pork',
           description: 'On rice',
-          price: 5.59
+          price: 5.59,
+          type:"food"
         }
       ]
     });

@@ -15,14 +15,17 @@ function App() {
     const [showDescription, setShowDescription] = useState<boolean>(false);
     const [search, setSearch] = useState("");
     const [showDrinks, setShowDrinks]=useState(false);
+    const [id, setId] = useState<number>(0);
 
     const [renderForm, setRenderForm] = useState(false);
 
     useEffect(() => {
         
         async function getFoodMenu() {
-            const response = await axios.get('http://localhost:8080/api/menu');
-          setFoodList(response.data);
+                const response = await axios.get('http://localhost:8080/api/menu');
+              setFoodList(response.data);
+
+
         }
 
         getFoodMenu();
@@ -47,30 +50,45 @@ function App() {
 
     }
 
+    const deleteItem= (id: string | number)=>{
+        axios.delete("http://localhost:8080/api/menu/item/delete/" + id);
+    }
+
     // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
+
+    const Foodpage=()=>{
+        return(
+        <>
+            <ul className='foodList' data-testid="menu-items" >
+                {foodList.filter(each => each.name.toLowerCase().includes(search.toLowerCase()) ||
+                    each.description.toLowerCase().includes(search.toLowerCase())).map((each, index) =>
+                    <li onClick={e=>setId(each.id)} key={index}>
+                        {(!showDrinks && each.type=="food") && each.name +' '+ each.price }
+                        {(showDrinks && each.type=="drinks")&& each.name +' '+ each.price}
+
+                        <br/>
+                        {(!showDrinks && each.type=="food" && showDescription) && <b >{each.description}</b>}
+                        {(showDrinks && each.type=="drinks" && showDescription) && <b >{each.description}</b>}
+
+                    </li>
+
+                )}
+            </ul>
+            <button onClick={getDescriptionOfFoodItem}>Food Description</button>
+            <button onClick={(e)=>deleteItem(id)}> Delete</button>
+        </>
+    )
+}
     return <div className="App">
         <FoodTruckNavBar renderDrinks={renderDrinks} handleForm={handleForm} handleSearchBox={handleSearchBox}/>
         <div>
             <img src={png} />
         </div>
 
-        {renderForm ? <FoodMenuForm handleForm={handleForm}/> : <>
+        {renderForm ? <FoodMenuForm handleForm={handleForm}/> : <Foodpage/>}
 
-
-        <ul className='foodList' data-testid="menu-items" >
-            {foodList.filter(each => each.name.toLowerCase().includes(search.toLowerCase()) ||
-                each.description.toLowerCase().includes(search.toLowerCase())).map((each, index) =>
-                    <li key={index}>
-                        { (!showDrinks && each.type=="food")? each.name +' '+ each.price:null}
-                        {(showDrinks && each.type=="drinks")? each.name +' '+ each.price:null}
-                        <br/>
-                        {(!showDrinks && each.type=="food" && showDescription) && <b >{each.description}</b>}
-                        {(showDrinks && each.type=="drinks" && showDescription) && <b >{each.description}</b>}
-                    </li>
-
-                )}
-        </ul>
-        <button onClick={getDescriptionOfFoodItem}>Food Description</button></>}
     </div>
 }
 

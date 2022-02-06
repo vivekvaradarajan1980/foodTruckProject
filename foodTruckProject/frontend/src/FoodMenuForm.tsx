@@ -18,7 +18,7 @@ const FoodMenuForm = (props: { handleForm: () => void; }) => {
         const dataToSave={name:name, price:price, description: description, type:type}
 
        axios.post('http://localhost:8080/api/menu/item',dataToSave,
-           {headers:{"Content-Type" : "application/json"}}).catch(e=>alert(dataToSave))
+           {headers:{"Content-Type" : "application/json"}})
 
        props.handleForm();
 
