@@ -1,0 +1,10 @@
+
+K
+java:S1128"/Remove this unused import 'jdk.jfr.DataAmount'.(›ÊÄ*8Ü––©ë/
+H
+java:S1128"+Remove this unused import 'lombok.Builder'.(§’Ğß8İ––©ë/
+J
+java:S1128"(Remove this unused import 'lombok.Data'.(÷í«ÿÿÿÿÿ8İ––©ë/
+R
+java:S1128"5Remove this unused import 'lombok.NoArgsConstructor'.(¸¨›8İ––©ë/
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(µõÅÒ
