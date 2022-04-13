@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "@mui/styled-engine": "^5.2.6"
+  },
+  "devDependencies": {
+    "cypress": "^9.5.4"
   }
 }
