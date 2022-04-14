@@ -26,7 +26,7 @@ function App() {
 
         getFoodMenu();
     
-      });
+      },[]);
 
     const getDescriptionOfFoodItem = () =>{
         setShowDescription(!showDescription)
