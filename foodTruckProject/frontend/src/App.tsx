@@ -3,11 +3,6 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {FoodItem} from "./model/FoodItem";
 import FoodTruckNavBar from "./FoodTruckNavBar";
-import foodTruck from "./foodTruck.gif";
-import png from "./PngItem_1227140.png";
-
-
-
 import FoodMenuForm from "./FoodMenuForm";
 
 function App() {
@@ -44,9 +39,6 @@ function App() {
     // @ts-ignore
     return <div className="App">
         <FoodTruckNavBar handleForm={handleForm} handleSearchBox={handleSearchBox}/>
-        <div>
-            <img src={png} />
-        </div>
 
         {renderForm ? <FoodMenuForm handleForm={handleForm}/> : <>
 

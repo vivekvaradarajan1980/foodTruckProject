@@ -1,20 +1,19 @@
 import {
     alpha,
-    Button,
     Drawer,
     InputBase,
     List,
     ListItem,
     ListItemText,
-    MenuItem,
     styled
 } from "@mui/material";
 import {AppBar, IconButton, Toolbar, Typography} from "@material-ui/core";
-import Menu from "@material-ui/icons/Menu";
 import React, {useState} from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from "@material-ui/icons/Menu";
-import { makeStyles, createStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
+import './App.css';
+import png from "./PngItem_1227140.png";
 
 
 
@@ -89,7 +88,15 @@ const FoodTruckNavBar = (props: { handleForm: () => void; handleSearchBox: React
                 >
                     <MenuIcon />
                 </IconButton>
+
+                <div>
+                    <img src={png}
+                         width="100"
+                    />
+                </div>
+
                 <Typography style={{color:"cornflowerblue"}} variant="h6"> V & G Food Truck </Typography>
+
 
 
                 <Drawer anchor="right" open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>

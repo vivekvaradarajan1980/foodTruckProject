@@ -1,3 +1,5 @@
+import '@testing-library/cypress/add-commands';
+
 const addProduct = (product: string) => {
   cy.findByLabelText("Product to add").type(product);
   cy.findByRole("button").click();

@@ -22,7 +22,7 @@ public class FoodServiceTest {
     private FoodService foodService;
 
     @Test
-    public void shouldReturnFoodMenuItems() {
+    public void getMenuItems_shouldReturnFoodMenuItems() {
         List<FoodItems> itemList = new ArrayList<>();
         FoodItems item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65);
         FoodItems item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25);
@@ -36,13 +36,12 @@ public class FoodServiceTest {
 
     }
     @Test
-    public void shouldReturnFoodItemByPrice() {
+    public void getFoodItemByPrice_shouldReturnFoodItemByPrice() {
         List<FoodItems> itemList = new ArrayList<>();
         FoodItems item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65);
         FoodItems item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25);
         itemList.addAll(Arrays.asList(item1, item2));
 
-        System.out.println(Arrays.asList(item1));
         when(foodRepository.findAllByPrice(5.65)).thenReturn(Arrays.asList(item1));
 
 
@@ -54,13 +53,12 @@ public class FoodServiceTest {
     }
 
     @Test
-    public void shouldReturnFoodItemByName() {
+    public void getFoodItemByName_shouldReturnFoodItemByName() {
         List<FoodItems> itemList = new ArrayList<>();
         FoodItems item1 = new FoodItems("Chicken Sandwich", "Chicken Sandwich on a white bread", 5.65);
         FoodItems item2 = new FoodItems("Pork Sandwich", "Pork Sandwich on a white bread", 3.25);
         itemList.addAll(Arrays.asList(item1, item2));
 
-        System.out.println(Arrays.asList(item1));
         when(foodRepository.findAllByNameContainingIgnoreCase("pork")).thenReturn(itemList);
 
 
