@@ -1,7 +1,5 @@
-import React, {FormEvent, useState} from "react";
-import {FoodItem} from "./model/FoodItem";
+import React, {useState} from "react";
 import axios from "axios";
-
 
 require('axios');
 
@@ -27,7 +25,7 @@ const FoodMenuForm = (props: { handleForm: () => void; }) => {
 
 
     return(
-        <form onSubmit={(e)=>postFoodMenu(e,name,description,price)}>
+        <form onSubmit={(e)=>postFoodMenu(e,name,description,price)} style={{paddingTop: '10px'}}>
         <label>
             Food Name:
             <input type="text" name="name" value={name} onChange={e=>setName(e.target.value)} placeholder="Name of Food" required/>
