@@ -3,7 +3,7 @@ import {
     Drawer,
     InputBase,
     List,
-    ListItem,
+    ListItemButton,
     ListItemText,
     styled
 } from "@mui/material";
@@ -101,21 +101,21 @@ const FoodTruckNavBar = (props: { handleForm: () => void; handleSearchBox: React
 
                 <Drawer anchor="right" open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
                     <List className={classes.drawer}>
-                        <ListItem button>
+                        <ListItemButton>
                             <ListItemText onClick={renderFoodMenuForm} primary="Add item" />
-                        </ListItem>
+                        </ListItemButton>
 
-                        <ListItem button>
+                        <ListItemButton>
                             <ListItemText primary="About" />
-                        </ListItem>
+                        </ListItemButton>
 
-                        <ListItem button>
+                        <ListItemButton>
                             <ListItemText primary="Contact" />
-                        </ListItem>
+                        </ListItemButton>
 
-                        <ListItem button>
+                        <ListItemButton>
                             <ListItemText primary="Services" />
-                        </ListItem>
+                        </ListItemButton>
                     </List>
                 </Drawer>
                 <Search>
@@ -129,8 +129,6 @@ const FoodTruckNavBar = (props: { handleForm: () => void; handleSearchBox: React
                     />
                 </Search>
             </Toolbar>
-
-
         </AppBar>
     )
 }

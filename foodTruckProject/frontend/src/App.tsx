@@ -53,7 +53,7 @@ function App() {
                     </li>
                 )}
         </ul>
-        <button onClick={getDescriptionOfFoodItem}>Food Description</button></>}
+        <button style={{borderRadius:'5px'}} onClick={getDescriptionOfFoodItem}>Food Description</button></>}
     </div>
 }
 

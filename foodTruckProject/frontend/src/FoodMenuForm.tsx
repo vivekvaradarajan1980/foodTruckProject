@@ -40,7 +40,7 @@ const FoodMenuForm = (props: { handleForm: () => void; }) => {
                 Food Price:
                 <input type="number" name="price"  value={price} onChange={e=>setPrice(e.target.value)} required placeholder="Price of Food"/>
             </label>
-        <input type="submit" value="Submit" />
+        <input style={{borderRadius:'5px'}} type="submit" value="Submit" />
     </form>)
 
 }
