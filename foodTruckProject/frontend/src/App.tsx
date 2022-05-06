@@ -43,13 +43,15 @@ function App() {
         {renderForm ? <FoodMenuForm handleForm={handleForm}/> : <>
 
 
-        <ul className='foodList' data-testid="menu-items" >
+        <ul style={{paddingLeft:'inherit'}} className='foodList' data-testid="menu-items" >
             {foodList.filter(each => each.name.toLowerCase().includes(search.toLowerCase()) ||
                 each.description.toLowerCase().includes(search.toLowerCase())).map((each, index) =>
                     <li key={index}>
                         {each.name} {each.price}
                         <br/>
                         {showDescription && <b >{each.description}</b>}
+                        <br/>
+                        <br/>
                     </li>
                 )}
         </ul>
